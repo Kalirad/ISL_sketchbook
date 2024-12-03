@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -65,6 +65,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Ch01';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Linear Regression" href="Ch02.html" />
     <link rel="prev" title="Welcome to the ISL sketchbook" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -142,8 +143,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="ISL sketchbook - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="ISL sketchbook - Home"/>
   
-    <p class="title logo__title">ISL sketchbook</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -165,6 +172,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">What is Statistical Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch02.html">Linear Regression</a></li>
+
 </ul>
 
     </div>
@@ -313,6 +322,12 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-vs-unsupervised-learning">Supervised vs Unsupervised Learning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-model-accuracy">Assessing Model Accuracy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-the-quality-of-fit">Measuring the Quality of Fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-trade-off">The Bias-Variance Trade-Off</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayes-classifier">The Bayes Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors">K-Nearest Neighbors</a></li>
 </ul>
 </li>
 </ul>
@@ -354,7 +369,7 @@ the random error term.*=</p>
 <p><strong>Q:</strong> How much different advertising methods affect sale?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">advertising</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/Advertising.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">advertising</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../datasets/Advertising.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -386,8 +401,8 @@ the random error term.*=</p>
 <p><strong>Q:</strong> How much income depends on education and/or age?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/Income1.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">income2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/Income2.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">income</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../datasets/Income1.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">income2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../datasets/Income2.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -627,6 +642,50 @@ observation.</p>
 </div>
 </div>
 </section>
+<section id="the-bias-variance-trade-off">
+<h3>The Bias-Variance Trade-Off<a class="headerlink" href="#the-bias-variance-trade-off" title="Link to this heading">#</a></h3>
+<p>The expected test MSE for a given <span class="math notranslate nohighlight">\(x_0\)</span> can be decomposed:</p>
+<div class="math notranslate nohighlight">
+\[E(y_0 - \hat{f}(x_0))^2 = \mathrm{Var}(\hat{f}(x_0)) + [
+\mathrm{Bias}(\hat{f}(x_0))]^2 + \mathrm{Var}(\epsilon) \quad .\]</div>
+<p><strong>We need to select a method that simultaneously lowers variance and
+bias.</strong></p>
+<ul class="simple">
+<li><p><em>Variance</em>: the amount by which <span class="math notranslate nohighlight">\(\hat{f}\)</span> would change if we
+estimated it using a different training data set.</p></li>
+<li><p><em>Bias</em>: the error that is introduced by approximating a real-life
+problem.</p></li>
+</ul>
+<p>The most common approach to quantify the accuracy of <span class="math notranslate nohighlight">\(\hat{f}\)</span> is the
+training error rate:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{n} \sum_{i=1}^{n} I(y_i \neq \hat{y}_i) \quad .\]</div>
+<p>The test error rate is:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Ave}(I(y_i \neq \hat{y}_i)) \quad .\]</div>
+</section>
+</section>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
+<section id="the-bayes-classifier">
+<h3>The Bayes Classifier<a class="headerlink" href="#the-bayes-classifier" title="Link to this heading">#</a></h3>
+<p>The test error rate is minimized by a simple classifier:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Pr}(Y=j | X=x_0) \quad ,\]</div>
+<p>with an overall error rate of</p>
+<div class="math notranslate nohighlight">
+\[1 - E \bigl( \mathrm{max } \mathrm{Pr}(Y=j|X)\bigr) \quad .\]</div>
+</section>
+<section id="k-nearest-neighbors">
+<h3>K-Nearest Neighbors<a class="headerlink" href="#k-nearest-neighbors" title="Link to this heading">#</a></h3>
+<p>Sine the Bayes classifier is purely theoretical, since we on not know the
+condition distributions of real data, many methods have been proposed to
+estimate these conditional distribution. For example in KNN, where:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Pr}(Y=j|X=x_0) = \frac{1}{K} \sum_{i \in \mathcal{N}_0} I(y_i=j)
+\quad ,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{N}_0\)</span> represents points that are closest to <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+</section>
 </section>
 </section>
 
@@ -669,6 +728,15 @@ observation.</p>
         <p class="prev-next-title">Welcome to the ISL sketchbook</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Ch02.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -694,6 +762,12 @@ observation.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-vs-unsupervised-learning">Supervised vs Unsupervised Learning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-model-accuracy">Assessing Model Accuracy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-the-quality-of-fit">Measuring the Quality of Fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-trade-off">The Bias-Variance Trade-Off</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayes-classifier">The Bayes Classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors">K-Nearest Neighbors</a></li>
 </ul>
 </li>
 </ul>
